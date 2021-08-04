@@ -110,18 +110,6 @@ cat > /etc/bin/wstunnel <<-END
 exit 0
 END
 
-
-cd
-mkdir /data
-#konfigurasi TLS / SSL
-wget -O /data/tls.pem "https://raw.githubusercontent.com/4hidessh/hidessh/main/certi/sg4-tls.pem"
-#konfigurasi NOn TLS
-wget -O /data/tls.key "https://raw.githubusercontent.com/4hidessh/hidessh/main/certi/sg4-key"
-cd
-#auto installer v2ray/vmess
-wget https://raw.githubusercontent.com/4hidessh/hidessh/main/vmess/install-vmess && chmod +x install-vmess && ./install-vmess
-
-
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
 #!/bin/sh -e
@@ -164,6 +152,18 @@ echo "clear" >> .profile
 echo "neofetch" >> .profile
 echo "echo by HideSSH.xom" >> .profile
 echo "echo Ketik menu" >> .profile
+
+
+cd
+mkdir /data
+#konfigurasi TLS / SSL
+wget -O /data/tls.pem "https://raw.githubusercontent.com/4hidessh/hidessh/main/certi/sg4-tls.pem"
+#konfigurasi NOn TLS
+wget -O /data/tls.key "https://raw.githubusercontent.com/4hidessh/hidessh/main/certi/sg4-key"
+cd
+#auto installer v2ray/vmess
+wget https://raw.githubusercontent.com/4hidessh/hidessh/main/vmess/install-vmess && chmod +x install-vmess && ./install-vmess
+
 
 # install badvpn
 cd
