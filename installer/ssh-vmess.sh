@@ -52,7 +52,6 @@ cat > /etc/systemd/system/edu-proxy.service << END
 Description=Python Edu Proxy By Radenpancal Service
 Documentation=https://hidessh.com
 After=network.target nss-lookup.target
-
 [Service]
 Type=simple
 User=root
@@ -61,7 +60,6 @@ AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxy 2082
 Restart=on-failure
-
 [Install]
 WantedBy=multi-user.target
 END
@@ -82,7 +80,6 @@ cat > /etc/systemd/system/edu-proxyssl.service << END
 Description=Python Edu Ssl Proxy By Radenpancal Service
 Documentation=https://hidessh.com
 After=network.target nss-lookup.target
-
 [Service]
 Type=simple
 User=root
@@ -91,7 +88,6 @@ AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl 700
 Restart=on-failure
-
 [Install]
 WantedBy=multi-user.target
 END
@@ -101,7 +97,6 @@ systemctl enable edu-proxyssl
 systemctl restart edu-proxyssl
 
 clear
-
 
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
