@@ -23,7 +23,8 @@ echo "IP=" >> /var/lib/premium-script/ipvps.conf
 
 #install ssh ovpn
 wget https://raw.githubusercontent.com/Alamyazid/rev/main/ssh.sh && chmod +x ssh.sh && screen -S ssh ./ssh.sh
-
+#install Websocket
+wget https://raw.githubusercontent.com/Alamyazid/Autoscript/main/websocket-python/websocket.sh && chmod +x websocket.sh && screen -S websocket.sh ./websocket.sh
 
 
 rm -f /root/ssh.sh
