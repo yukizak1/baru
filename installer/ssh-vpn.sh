@@ -203,7 +203,7 @@ sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-c
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7400 --max-clients 500
+
 
 # setting port ssh
 
@@ -291,7 +291,7 @@ sudo make install
 END
 
 #OpenVPN
-wget https://raw.githubusercontent.com/4hidessh/baru/main/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
+wget https://raw.githubusercontent.com/4hidessh/hidessh/main/OVPN/ovpnbaru.sh && chmod +x ovpnbaru.sh && ./ovpnbaru.sh
 
 # install fail2ban
 apt -y install fail2ban
