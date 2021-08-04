@@ -333,6 +333,14 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 
+cd
+#install sslh
+apt-get install sslh -y
+
+#konfigurasi
+#port 333
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/hidessh/main/sslh/sslh1"
+service sslh restart
 
 cd
 # Delete Acount SSH Expired
