@@ -293,6 +293,14 @@ netfilter-persistent save
 netfilter-persistent reload
 
 
+#install sslh
+apt-get install sslh -y
+
+#konfigurasi
+#port 333
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/hidessh/main/sslh/sslh1"
+service sslh restart
+
 cd
 # Delete Acount SSH Expired
 echo "================  Auto deleted Account Expired ======================"
