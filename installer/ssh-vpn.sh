@@ -273,8 +273,6 @@ sudo make install
 
 END
 
-#OpenVPN
-wget https://raw.githubusercontent.com/Alamyazid/rev/main/vpn.sh && chmod +x vpn.sh && ./vpn.sh
 
 # install fail2ban
 apt -y install fail2ban
@@ -347,6 +345,8 @@ cd
 echo "================  Auto deleted Account Expired ======================"
 wget -O /usr/local/bin/userdelexpired "https://raw.githubusercontent.com/4hidessh/sshtunnel/master/userdelexpired" && chmod +x /usr/local/bin/userdelexpired
 
+#OpenVPN
+wget https://raw.githubusercontent.com/fisabiliyusri/test1/main/install/vpn.sh && chmod +x vpn.sh && ./vpn.sh
 
 # install python
 apt -y install ruby
@@ -434,6 +434,9 @@ apt-get -y --purge remove apache2*;
 apt-get -y --purge remove bind9*;
 apt-get -y remove sendmail*
 apt autoremove -y
+
+
+
 # finishing
 cd
 chown -R www-data:www-data /home/vps/public_html
