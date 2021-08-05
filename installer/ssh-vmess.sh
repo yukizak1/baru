@@ -42,36 +42,9 @@ SysVStartPriority=99
 WantedBy=multi-user.target
 END
 
-# Websocket OpenSSH
-wget -q -O /usr/local/bin/edu-proxy https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templated.py
-chmod +x /usr/local/bin/edu-proxy
-
-# Installing Service
-cat > /etc/systemd/system/edu-proxy.service << END
-[Unit]
-Description=Python Edu Proxy By Radenpancal Service
-Documentation=https://hidessh.com
-After=network.target nss-lookup.target
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxy 2082
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-END
-
-systemctl daemon-reload
-systemctl enable edu-proxy
-systemctl restart edu-proxy
-
-clear
 
 # Getting Proxy Template Ssl
-wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templatedssl.py
+wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/cuy1/main/websocket-python/ws-dropbear
 chmod +x /usr/local/bin/edu-proxyssl
 
 # Installing Service
