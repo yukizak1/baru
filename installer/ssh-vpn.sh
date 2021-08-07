@@ -132,6 +132,8 @@ systemctl restart edu-proxyovpn
 
 clear
 
+#warning tidak paham proses ini
+
 # nano /etc/bin/wstunnel
 cat > /etc/bin/wstunnel <<-END
 #!/bin/sh -e
@@ -208,14 +210,19 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 # setting port ssh
 
 sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
-sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 500' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 40000' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 58080' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 51443' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 200' /etc/ssh/sshd_config
+sed -i 's/#Port 22/Port 24/g' /etc/ssh/sshd_config
 
 
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=44/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 69"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 69 -p 143 -p 50000 -p 109 -p 77"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
@@ -237,11 +244,15 @@ socket = r:TCP_NODELAY=1
 
 [dropbear]
 accept = 222
-connect = 127.0.0.1:22
+connect = 127.0.0.1:24
 
 [dropbear]
 accept = 444
 connect = 127.0.0.1:44
+
+[dropbear]
+accept = 777
+connect = 127.0.0.1:77
 
 [openvpn]
 accept = 442
@@ -262,6 +273,16 @@ cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
 # konfigurasi stunnel
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 /etc/init.d/stunnel4 restart
+
+
+cd
+#install sslh
+apt-get install sslh -y
+
+#konfigurasi
+#port 2443
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/fisabiliyusri/Betatest/master/debian9/sslh-conf"
+service sslh restart
 
 #install badvpncdn
 wget https://github.com/ambrop72/badvpn/archive/master.zip
@@ -304,15 +325,6 @@ echo; echo 'Installation has completed.'
 echo 'Config file is at /usr/local/ddos/ddos.conf'
 echo 'Please send in your comments and/or suggestions to zaf@vsnl.com'
 
-
-# Custom Banner SSH
-echo "================  Banner ======================"
-wget -O /etc/issue.net "https://github.com/idtunnel/sshtunnel/raw/master/debian9/banner-custom.conf"
-chmod +x /etc/issue.net
-
-echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
-echo "DROPBEAR_BANNER="/etc/issue.net"" >> /etc/default/dropbear
-
 # blockir torrent
 apt install iptables-persistent -y
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
@@ -331,14 +343,15 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 
-cd
-#install sslh
-apt-get install sslh -y
 
-#konfigurasi
-#port 333
-wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/hidessh/main/sslh/sslh1"
-service sslh restart
+cd
+# Custom Banner SSH
+echo "================  Banner ======================"
+wget -O /etc/issue.net "https://github.com/idtunnel/sshtunnel/raw/master/debian9/banner-custom.conf"
+chmod +x /etc/issue.net
+
+echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
+echo "DROPBEAR_BANNER="/etc/issue.net"" >> /etc/default/dropbear
 
 cd
 # Delete Acount SSH Expired
@@ -346,6 +359,7 @@ echo "================  Auto deleted Account Expired ======================"
 wget -O /usr/local/bin/userdelexpired "https://raw.githubusercontent.com/4hidessh/sshtunnel/master/userdelexpired" && chmod +x /usr/local/bin/userdelexpired
 
 #OpenVPN
+cd
 wget https://raw.githubusercontent.com/fisabiliyusri/test1/main/install/vpn.sh && chmod +x vpn.sh && ./vpn.sh
 
 # install python
