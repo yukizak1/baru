@@ -72,37 +72,6 @@ systemctl restart edu-proxy
 
 clear
 
-
-# Websocket Dropbear
-wget -q -O /usr/local/bin/dropbear-proxy https://raw.githubusercontent.com/4hidessh/baru/main/ws-dropbear.py
-chmod +x /usr/local/bin/dropbear-proxy
-
-# Installing Service
-cat > /etc/systemd/system/edu-proxy.service << END
-[Unit]
-Description=Python Edu Proxy By Radenpancal Service
-Documentation=https://hidessh.com
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/dropbear-proxy 8880 
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
-systemctl daemon-reload
-systemctl enable dropbear-proxy
-systemctl restart dropbear-proxy
-
-clear
-
 # Getting Proxy Template Ssl
 wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templatedssl.py
 chmod +x /usr/local/bin/edu-proxyssl
@@ -239,24 +208,23 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 
 
 # setting port ssh
-sed -i '/Port 22/a Port 40000' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 88' /etc/ssh/sshd_config
 sed -i 's/#Port 22/Port 24/g' /etc/ssh/sshd_config
 
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=44/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143 -p 77"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 77"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
 
 
 #instalasi websocket
-#port openssh ws 4000 to 2082
-#port dropbear ws 143 to 8880  
-#port stunnel ws 443 to 2096
-#port openvpn ws 1194 to 2086
+#port openssh ws 4000 to 2082 http
+#port stunnel ws 443 to 2096 https to sslh
+#port openvpn ws 1194 to 2086 http
 
 # install stunnel
 apt install stunnel4 -y
