@@ -208,30 +208,25 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 
 
 # setting port ssh
-
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 500' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 40000' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port 58080' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port 51443' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port 200' /etc/ssh/sshd_config
 sed -i 's/#Port 22/Port 24/g' /etc/ssh/sshd_config
-
 
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=44/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 69 -p 143 -p 50000 -p 109 -p 77"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143 -p 77"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
 
-# install squid
-cd
-apt -y install squid3
-wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/4hidessh/hidessh/main/config/squid2"
-sed -i $MYIP2 /etc/squid/squid.conf
+
+#instalasi websocket
+#port openssh ws 4000 to 2082
+#port dropbear ws 143 to 8880  
+#port stunnel ws 443 to 2096
+#port openvpn ws 
 
 # install stunnel
 apt install stunnel4 -y
@@ -258,9 +253,9 @@ connect = 127.0.0.1:77
 accept = 442
 connect = 127.0.0.1:1194
 
-[wsssl]
+[slws]
 accept = 443
-connect = 700
+connect = 127.0.0.1:2096
 
 END
 
@@ -274,7 +269,6 @@ cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
 sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
 /etc/init.d/stunnel4 restart
 
-
 cd
 #install sslh
 apt-get install sslh -y
@@ -283,6 +277,14 @@ apt-get install sslh -y
 #port 2443
 wget -O /etc/default/sslh "https://raw.githubusercontent.com/fisabiliyusri/Betatest/master/debian9/sslh-conf"
 service sslh restart
+
+
+# install squid
+cd
+apt -y install squid3
+wget -O /etc/squid/squid.conf "https://raw.githubusercontent.com/4hidessh/hidessh/main/config/squid2"
+sed -i $MYIP2 /etc/squid/squid.conf
+
 
 #install badvpncdn
 wget https://github.com/ambrop72/badvpn/archive/master.zip
