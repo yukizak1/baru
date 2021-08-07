@@ -13,7 +13,7 @@ PASS = ''
 # CONST
 BUFLEN = 4096 * 4
 TIMEOUT = 60
-DEFAULT_HOST = '127.0.0.1:4000'
+DEFAULT_HOST = '127.0.0.1:40000'
 RESPONSE = 'HTTP/1.1 101 OpenSSH Websocket Bye HideSSH.com\r\n\r\nContent-Length: 104857600000\r\n\r\n'
 
 class Server(threading.Thread):
