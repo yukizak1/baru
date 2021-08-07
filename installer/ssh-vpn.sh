@@ -72,6 +72,37 @@ systemctl restart edu-proxy
 
 clear
 
+
+# Websocket Dropbear
+wget -q -O /usr/local/bin/dropbear-proxy https://raw.githubusercontent.com/4hidessh/baru/main/ws-dropbear.py
+chmod +x /usr/local/bin/dropbear-proxy
+
+# Installing Service
+cat > /etc/systemd/system/edu-proxy.service << END
+[Unit]
+Description=Python Edu Proxy By Radenpancal Service
+Documentation=https://hidessh.com
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/dropbear-proxy 8880 
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+
+systemctl daemon-reload
+systemctl enable dropbear-proxy
+systemctl restart dropbear-proxy
+
+clear
+
 # Getting Proxy Template Ssl
 wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templatedssl.py
 chmod +x /usr/local/bin/edu-proxyssl
@@ -89,7 +120,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl 700
+ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl 2096
 Restart=on-failure
 
 [Install]
@@ -208,7 +239,6 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 
 
 # setting port ssh
-sed -i '/Port 22/a Port 500' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 40000' /etc/ssh/sshd_config
 sed -i 's/#Port 22/Port 24/g' /etc/ssh/sshd_config
 
@@ -226,7 +256,7 @@ echo "/usr/sbin/nologin" >> /etc/shells
 #port openssh ws 4000 to 2082
 #port dropbear ws 143 to 8880  
 #port stunnel ws 443 to 2096
-#port openvpn ws 
+#port openvpn ws 1194 to 2086
 
 # install stunnel
 apt install stunnel4 -y
@@ -274,7 +304,7 @@ cd
 apt-get install sslh -y
 
 #konfigurasi
-#port 2443
+#port 2443 to 44 and 777
 wget -O /etc/default/sslh "https://raw.githubusercontent.com/fisabiliyusri/Betatest/master/debian9/sslh-conf"
 service sslh restart
 
@@ -463,7 +493,6 @@ chown -R www-data:www-data /home/vps/public_html
 /etc/init.d/dropbear restart
 /etc/init.d/fail2ban restart
 /etc/init.d/stunnel4 restart
-/etc/init.d/vnstat restart
 /etc/init.d/squid restart
 
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
