@@ -76,7 +76,7 @@ systemctl restart edu-proxy
 clear
 
 # Getting Proxy Template Ssl
-wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templatedssl.py
+wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-stunnel
 chmod +x /usr/local/bin/edu-proxyssl
 
 # Installing Service
