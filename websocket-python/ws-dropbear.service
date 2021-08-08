@@ -3,7 +3,7 @@
 # /usr/local/bin/ws-stunnel
 [Unit]
 Description=SSH Over Websocket Python YNTKTS
-Documentation=https://google.com
+Documentation=https://hidessh.com
 After=network.target nss-lookup.target
 
 [Service]
@@ -13,7 +13,7 @@ CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 Restart=on-failure
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-dropbear 8880
 
 [Install]
 WantedBy=multi-user.target
