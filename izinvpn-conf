@@ -9,3 +9,5 @@ iptables -t nat -A POSTROUTING -s 10.6.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 iptables -t nat -A POSTROUTING -s 10.15.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
+
+exit 0
