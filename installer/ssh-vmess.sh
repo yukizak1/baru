@@ -302,9 +302,6 @@ wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/hidessh/ma
 service sslh restart
 
 cd
-# Delete Acount SSH Expired
-echo "================  Auto deleted Account Expired ======================"
-wget -O /usr/local/bin/userdelexpired "https://raw.githubusercontent.com/4hidessh/sshtunnel/master/userdelexpired" && chmod +x /usr/local/bin/userdelexpired
 
 
 # install python
@@ -314,6 +311,7 @@ apt -y install figlet
 
 # download script
 cd /usr/bin
+wget -O userdelexpired "https://raw.githubusercontent.com/4hidessh/sshtunnel/master/userdelexpired"
 wget -O add-host "https://raw.githubusercontent.com/4hidessh/cuy1/main/tambah/addhost1.sh"
 wget -O about "https://raw.githubusercontent.com/4hidessh/baru/main/about.sh"
 wget -O menu "https://raw.githubusercontent.com/4hidessh/baru/main/menu.sh"
@@ -349,6 +347,43 @@ wget -O cfd "https://raw.githubusercontent.com/4hidessh/baru/main/cfd.sh"
 wget -O cff "https://raw.githubusercontent.com/4hidessh/baru/main/cff.sh"
 wget -O cfh "https://raw.githubusercontent.com/4hidessh/baru/main/cfh.sh"
 wget -O autoreboot "https://raw.githubusercontent.com/4hidessh/baru/main/autoreboot.sh"
+
+#khusus V2ray /Vmess
+wget -O addws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/tambah/addws.sh"
+wget -O addvless "https://raw.githubusercontent.com/fisabiliyusri/test1/main/tambah/addvless.sh"
+wget -O addtr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/tambah/addtr.sh"
+wget -O delws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/hapus/delws.sh"
+wget -O delvless "https://raw.githubusercontent.com/fisabiliyusri/test1/main/hapus/delvless.sh"
+wget -O deltr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/hapus/deltr.sh"
+wget -O cekws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cekws.sh"
+wget -O cekvless "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cekvless.sh"
+wget -O cektr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cektr.sh"
+wget -O renewws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/renewws.sh"
+wget -O renewvless "https://raw.githubusercontent.com/fisabiliyusri/test1/main/renewvless.sh"
+wget -O renewtr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/renewtr.sh"
+wget -O xp-ws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/xp-ws.sh"
+wget -O certv2ray "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cert.sh"
+
+#khusus v2ray
+chmod +x addws
+chmod +x addvless
+chmod +x addtr
+chmod +x delws
+chmod +x delvless
+chmod +x deltr
+chmod +x cekws
+chmod +x cekvless
+chmod +x cektr
+chmod +x renewws
+chmod +x renewtr
+chmod +x renewvless
+chmod +x xp-ws
+chmod +x xp-tr
+chmod +x xp-vless
+chmod +x certv2ray
+
+
+chmod +x userdelexpired
 chmod +x add-host
 chmod +x menu
 chmod +x usernew
@@ -383,7 +418,13 @@ chmod +x cfd
 chmod +x cff
 chmod +x cfh
 chmod +x autoreboot
+
+
+#auto deleted account
+echo "0 0 * * * root xp-ws" >> /etc/crontab
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
+echo "0 1 * * * root userdelexpired" >> /etc/crontab
+
 # remove unnecessary files
 cd
 apt autoclean -y
