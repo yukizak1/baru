@@ -488,12 +488,14 @@ iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 END
 sed -i $MYIP2 /etc/network/if-up.d/iptables
 chmod +x /etc/network/if-up.d/iptables
+netfilter-persistent save
+netfilter-persistent reload
 
 #permision
-sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.6.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
-sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
-sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.15.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
-sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+#sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.6.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+#sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+#sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.15.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+#sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
 
 
 
