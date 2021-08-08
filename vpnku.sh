@@ -270,6 +270,7 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-1197.ovpn;
@@ -297,6 +298,7 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-udp-1197.ovpn;
@@ -323,9 +325,39 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
+
+
+# Buat config client UDP 1194
+cat > /etc/openvpn/client-udp-1194.ovpn <<-END
+############## WELCOME TO ###############
+########## SLNET ###########
+####### DONT FORGET TO SUPPORT US #######
+client
+dev tun
+proto udp
+remote xxxxxxxxx 1194
+##### Modification VPN with BUG and Squid Proxy #####
+#http-proxy-retry
+#http-proxy xxxxxxxxx 3128
+#http-proxy-option CUSTOM-HEADER Host google.com
+##### if used, you can delete the code below ####
+resolv-retry infinite
+route-method exe
+nobind
+persist-key
+persist-tun
+auth-user-pass
+comp-lzo
+verb 3
+client-cert-not-required
+END
+
+sed -i $MYIP2 /etc/openvpn/client-udp-1194.ovpn;
+
 
 # Buat config client UDP 2200
 cat > /etc/openvpn/client-udp-2200.ovpn <<-END
@@ -349,6 +381,7 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-udp-2200.ovpn;
@@ -375,6 +408,7 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-2200.ovpn;
@@ -396,6 +430,7 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-ssl.ovpn;
