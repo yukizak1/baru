@@ -490,6 +490,7 @@ rm -f /root/key.pem
 rm -f /root/cert.pem
 rm -f /root/ssh-vpn.sh
 rm -f /root/ihide
+rm -rf /root/vpnku.sh
 
 
 apt-get install dnsutils jq -y
