@@ -489,6 +489,15 @@ END
 sed -i $MYIP2 /etc/network/if-up.d/iptables
 chmod +x /etc/network/if-up.d/iptables
 
+#permision
+sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.6.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.15.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
+
+
+
+
 # restart opevpn
 /etc/init.d/openvpn restart
 
@@ -497,4 +506,4 @@ history -c
 rm -f /root/vpn.sh
 
 cd /home/vps/public_html/
-zip config.zip client-tcp-2200.ovpn client-udp-2200.ovpn client-tcp-1194.ovpn client-tcp-1194.ovpn
+zip config.zip client-tcp-2200.ovpn client-udp-2200.ovpn client-tcp-1194.ovpn client-tcp-1194.ovpn client-tcp-ssl.ovpn
