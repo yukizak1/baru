@@ -75,6 +75,18 @@ systemctl restart edu-proxy
 
 clear
 
+# Dropbear WebSocket
+cd
+wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-dropbear && chmod +x /usr/local/bin/ws-dropbear
+wget -O /etc/systemd/system/ws-dropbear.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-dropbear.service && chmod +x /etc/systemd/system/ws-dropbear.service
+#reboot service
+systemctl daemon-reload
+systemctl enable ws-dropbear.service
+systemctl start ws-dropbear.service
+systemctl restart ws-dropbear.service
+
+clear
+
 # Getting Proxy Template Ssl
 wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-stunnel
 chmod +x /usr/local/bin/edu-proxyssl
@@ -137,23 +149,11 @@ clear
 
 #keterangan_WebSocket  
 #OpenSSH Websocket 88 to 2082 HTTP
-#SSL/TLS Websocket 69 to 2096 HTTPS
+#Dropbear Websocket 69 to 8880 HTTP
+#SSL/TLS Websocket 333 to 2096 HTTPS
 #OpenVPN Websocket 1194 to 2086 HTTP
 
 #Selesai instalasi Websocket
-
-
-#warning tidak paham proses ini
-
-# nano /etc/bin/wstunnel
-#cat > /etc/bin/wstunnel <<-END
-#!/bin/sh -e
-# wstunnel
-# By default this script does nothing
-#exit 0
-#END
-
-#warning tidak paham proses ini
 
 
 # nano /etc/rc.local
