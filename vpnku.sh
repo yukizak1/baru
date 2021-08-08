@@ -508,4 +508,4 @@ history -c
 rm -f /root/vpn.sh
 
 cd /home/vps/public_html/
-zip config.zip client-tcp-2200.ovpn client-udp-2200.ovpn client-tcp-1194.ovpn client-tcp-1194.ovpn client-tcp-ssl.ovpn
+zip config.zip client-tcp-2200.ovpn client-udp-2200.ovpn client-tcp-1194.ovpn client-udp-1194.ovpn client-tcp-ssl.ovpn
