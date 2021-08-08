@@ -196,7 +196,7 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
 echo "clear" >> .profile
 echo "neofetch" >> .profile
-echo "echo by HideSSH.xom" >> .profile
+echo "echo by HideSSH.com" >> .profile
 echo "echo Ketik menu" >> .profile
 
 # install webserver
@@ -224,7 +224,7 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 # setting port ssh
 sed -i '/Port 22/a Port 88' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 100' /etc/ssh/sshd_config
-sed -i 's/#Port 22/Port 24/g' /etc/ssh/sshd_config
+sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
 
 # install dropbear
 apt -y install dropbear
@@ -246,7 +246,7 @@ socket = r:TCP_NODELAY=1
 
 [dropbear]
 accept = 222
-connect = 127.0.0.1:24
+connect = 127.0.0.1:22
 
 [dropbear]
 accept = 444
