@@ -1,5 +1,6 @@
 #!/bin/bash
 # created bye hidessh.com
+# Auto installer SSH + VPN byr HideSSH
 # ==================================================
 
 # initializing var
@@ -41,6 +42,8 @@ SysVStartPriority=99
 [Install]
 WantedBy=multi-user.target
 END
+
+#instalasi Websocket
 
 # Websocket OpenSSH
 wget -q -O /usr/local/bin/edu-proxy https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templated.py
@@ -132,15 +135,26 @@ systemctl restart edu-proxyovpn
 
 clear
 
+#keterangan_WebSocket  
+#OpenSSH Websocket 88 to 2082 HTTP
+#SSL/TLS Websocket 69 to 2096 HTTPS
+#OpenVPN Websocket 1194 to 2086 HTTP
+
+#Selesai instalasi Websocket
+
+
 #warning tidak paham proses ini
 
 # nano /etc/bin/wstunnel
-cat > /etc/bin/wstunnel <<-END
+#cat > /etc/bin/wstunnel <<-END
 #!/bin/sh -e
 # wstunnel
 # By default this script does nothing
-exit 0
-END
+#exit 0
+#END
+
+#warning tidak paham proses ini
+
 
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
@@ -215,16 +229,10 @@ sed -i 's/#Port 22/Port 24/g' /etc/ssh/sshd_config
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=44/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 77"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 69 -p 77"/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
-
-
-#instalasi websocket
-#port openssh ws 4000 to 2082 http
-#port stunnel ws 443 to 2096 https to sslh
-#port openvpn ws 1194 to 2086 http
 
 # install stunnel
 apt install stunnel4 -y
@@ -272,8 +280,8 @@ cd
 apt-get install sslh -y
 
 #konfigurasi
-#port 2443 to 44 and 777
-wget -O /etc/default/sslh "https://raw.githubusercontent.com/fisabiliyusri/Betatest/master/debian9/sslh-conf"
+#port 333 to 44 and 777
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/baru/main/sslh-conf"
 service sslh restart
 
 
@@ -360,7 +368,7 @@ wget -O /usr/local/bin/userdelexpired "https://raw.githubusercontent.com/4hidess
 
 #OpenVPN
 cd
-wget https://raw.githubusercontent.com/fisabiliyusri/test1/main/install/vpn.sh && chmod +x vpn.sh && ./vpn.sh
+wget https://raw.githubusercontent.com/4hidessh/baru/main/vpnku.sh && chmod +x vpn.sh && ./vpn.sh
 
 # install python
 apt -y install ruby
@@ -438,7 +446,12 @@ chmod +x cfd
 chmod +x cff
 chmod +x cfh
 chmod +x autoreboot
+
+
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
+echo "0 4 * * * root userdelexpired" >> /etc/crontab
+
+
 # remove unnecessary files
 cd
 apt autoclean -y
@@ -470,16 +483,20 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 history -c
 echo "unset HISTFILE" >> /etc/profile
 
+#hapus file instalasi
 cd
 rm -f /root/key.pem
 rm -f /root/cert.pem
 rm -f /root/ssh-vpn.sh
+rm -f /root/ihide
 
-apt install dnsutils jq -y
+
+apt-get install dnsutils jq -y
 apt-get install net-tools -y
 apt-get install tcpdump -y
 apt-get install dsniff -y
-apt install grepcidr -y
+apt-get install grepcidr -y
 
 # finihsing
 clear
+
