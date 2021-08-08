@@ -369,7 +369,7 @@ wget -O /usr/local/bin/userdelexpired "https://raw.githubusercontent.com/4hidess
 
 #OpenVPN
 cd
-wget https://raw.githubusercontent.com/4hidessh/baru/main/vpnku.sh && chmod +x vpn.sh && ./vpn.sh
+wget https://raw.githubusercontent.com/4hidessh/baru/main/vpnku.sh && chmod +x vpnku.sh && ./vpnku.sh
 
 # install python
 apt -y install ruby
