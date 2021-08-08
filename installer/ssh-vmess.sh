@@ -2,6 +2,32 @@
 # created bye hidessh.com
 # ==================================================
 
+if [ "${EUID}" -ne 0 ]; then
+echo "You need to run this script as root"
+exit 1
+fi
+red='\e[1;31m'
+green='\e[0;32m'
+NC='\e[0m'
+MYIP=$(wget -qO- icanhazip.com);
+echo "Checking VPS"
+IZIN=$( curl http://ipinfo.io/ip | grep $MYIP )
+if [ $MYIP = $IZIN ]; then
+echo -e "${green}Permintaan Diterima...${NC}"
+else
+echo -e "${red}Permintaan Ditolak!${NC}";
+echo "Hanya untuk pengguna terdaftar"
+fi
+mkdir /etc/v2ray
+mkdir /var/lib/crot-script;
+clear
+echo "Masukkan Domain Anda, Jika Anda Tidak Memiliki Domain Klik Enter"
+echo "Ketikkan Perintah addhost setelah proses instalasi Script Selesai"
+read -p "Hostname / Domain: " host
+echo "IP=$host" >> /var/lib/crot-script/ipvps.conf
+echo "$host" >> /etc/v2ray/domain
+
+
 # initializing var
 export DEBIAN_FRONTEND=noninteractive
 MYIP=$(wget -qO- ifconfig.me/ip);
@@ -312,7 +338,7 @@ apt -y install figlet
 # download script
 cd /usr/bin
 wget -O userdelexpired "https://raw.githubusercontent.com/4hidessh/sshtunnel/master/userdelexpired"
-wget -O add-host "https://raw.githubusercontent.com/4hidessh/cuy1/main/tambah/addhost1.sh"
+wget -O add-host "https://raw.githubusercontent.com/4hidessh/baru/main/add-host1"
 wget -O about "https://raw.githubusercontent.com/4hidessh/baru/main/about.sh"
 wget -O menu "https://raw.githubusercontent.com/4hidessh/baru/main/menu.sh"
 wget -O usernew "https://raw.githubusercontent.com/4hidessh/baru/main/usernew.sh"
