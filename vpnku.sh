@@ -82,6 +82,35 @@ status server-tcp-1194.log
 verb 3
 END
 
+
+# Buat config server UDP 1194
+
+cd /etc/openvpn
+cat > /etc/openvpn/server-udp-1194.conf <<-END
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
+verify-client-cert none
+username-as-common-name
+server 10.15.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 94.140.14.15"
+push "dhcp-option DNS 94.140.15.16"
+keepalive 5 30
+comp-lzo
+persist-key
+persist-tun
+status server-udp-1194.log
+verb 3
+END
+
+
 # Buat config server TCP 1197
 
 cd /etc/openvpn
@@ -108,6 +137,65 @@ persist-tun
 status server-tcp-1197.log
 verb 3
 END
+
+
+# Buat config server UDP 1197
+
+cd /etc/openvpn
+cat > /etc/openvpn/server-udp-1197.conf <<-END
+port 1197
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
+verify-client-cert none
+username-as-common-name
+server 10.6.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 94.140.14.15"
+push "dhcp-option DNS 94.140.15.16"
+keepalive 5 30
+comp-lzo
+persist-key
+persist-tun
+status server-udp-1197.log
+verb 3
+END
+
+
+
+
+# Buat config server TCP 2200
+
+cd /etc/openvpn
+cat > /etc/openvpn/server-tcp-2200.conf <<-END
+port 2200
+proto tcp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
+verify-client-cert none
+username-as-common-name
+server 10.17.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 94.140.14.15"
+push "dhcp-option DNS 94.140.15.16"
+keepalive 5 30
+comp-lzo
+persist-key
+persist-tun
+status server-tcp-2200.log
+verb 3
+END
+
 
 # Buat config server UDP 2200
 cat > /etc/openvpn/server-udp-2200.conf <<-END
@@ -376,6 +464,8 @@ cp /etc/openvpn/client-tcp-ssl.ovpn /home/vps/public_html/client-tcp-ssl.ovpn
 
 iptables -t nat -I POSTROUTING -s 10.6.0.0/24 -o $ANU -j MASQUERADE
 iptables -t nat -I POSTROUTING -s 10.7.0.0/24 -o $ANU -j MASQUERADE
+iptables -t nat -I POSTROUTING -s 10.16.0.0/24 -o $ANU -j MASQUERADE
+iptables -t nat -I POSTROUTING -s 10.17.0.0/24 -o $ANU -j MASQUERADE
 iptables-save > /etc/iptables.up.rules
 chmod +x /etc/iptables.up.rules
 
@@ -393,6 +483,8 @@ cat > /etc/network/if-up.d/iptables <<-END
 iptables-restore < /etc/iptables.up.rules
 iptables -t nat -A POSTROUTING -s 10.6.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
+iptables -t nat -A POSTROUTING -s 10.15.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
+iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 END
 sed -i $MYIP2 /etc/network/if-up.d/iptables
 chmod +x /etc/network/if-up.d/iptables
