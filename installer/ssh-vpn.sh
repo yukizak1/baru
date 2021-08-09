@@ -223,7 +223,6 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 
 # setting port ssh
 sed -i '/Port 22/a Port 88' /etc/ssh/sshd_config
-sed -i '/Port 22/a Port 100' /etc/ssh/sshd_config
 sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
 
 # install dropbear
