@@ -97,7 +97,7 @@ dh dh2048.pem
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 verify-client-cert none
 username-as-common-name
-server 10.15.0.0 255.255.255.0
+server 10.7.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 push "redirect-gateway def1 bypass-dhcp"
 push "dhcp-option DNS 94.140.14.15"
@@ -109,65 +109,6 @@ persist-tun
 status server-udp-1194.log
 verb 3
 END
-
-
-# Buat config server TCP 1197
-
-cd /etc/openvpn
-cat > /etc/openvpn/server-tcp-1197.conf <<-END
-port 1197
-proto tcp
-dev tun
-ca ca.crt
-cert server.crt
-key server.key
-dh dh2048.pem
-plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
-verify-client-cert none
-username-as-common-name
-server 10.6.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt
-push "redirect-gateway def1 bypass-dhcp"
-push "dhcp-option DNS 94.140.14.15"
-push "dhcp-option DNS 94.140.15.16"
-keepalive 5 30
-comp-lzo
-persist-key
-persist-tun
-status server-tcp-1197.log
-verb 3
-END
-
-
-# Buat config server UDP 1197
-
-cd /etc/openvpn
-cat > /etc/openvpn/server-udp-1197.conf <<-END
-port 1197
-proto udp
-dev tun
-ca ca.crt
-cert server.crt
-key server.key
-dh dh2048.pem
-plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
-verify-client-cert none
-username-as-common-name
-server 10.6.0.0 255.255.255.0
-ifconfig-pool-persist ipp.txt
-push "redirect-gateway def1 bypass-dhcp"
-push "dhcp-option DNS 94.140.14.15"
-push "dhcp-option DNS 94.140.15.16"
-keepalive 5 30
-comp-lzo
-persist-key
-persist-tun
-status server-udp-1197.log
-verb 3
-END
-
-
-
 
 # Buat config server TCP 2200
 
@@ -183,7 +124,7 @@ dh dh2048.pem
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 verify-client-cert none
 username-as-common-name
-server 10.17.0.0 255.255.255.0
+server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 push "redirect-gateway def1 bypass-dhcp"
 push "dhcp-option DNS 94.140.14.15"
@@ -209,7 +150,7 @@ dh dh2048.pem
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 verify-client-cert none
 username-as-common-name
-server 10.7.0.0 255.255.255.0
+server 10.9.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 push "redirect-gateway def1 bypass-dhcp"
 push "dhcp-option DNS 94.140.14.15"
@@ -246,62 +187,6 @@ mkdir clientconfig
 cp /etc/openvpn/{server.crt,server.key,ca.crt,ta.key} clientconfig/
 cd clientconfig
 
-
-# Buat config client TCP 1197
-cd /etc/openvpn
-cat > /etc/openvpn/client-tcp-1197.ovpn <<-END
-############## WELCOME TO HideSSH.com ###############
-########## Config Bye HideSSH ###########
-####### DONT FORGET TO SUPPORT US #######
-client
-dev tun
-proto tcp
-remote xxxxxxxxx 1197
-##### Modification VPN with BUG and Squid Proxy #####
-#http-proxy-retry
-#http-proxy xxxxxxxxx 3128
-#http-proxy-option CUSTOM-HEADER Host google.com
-##### if used, you can delete the code below ####
-resolv-retry infinite
-route-method exe
-nobind
-persist-key
-persist-tun
-auth-user-pass
-comp-lzo
-verb 3
-client-cert-not-required
-END
-
-sed -i $MYIP2 /etc/openvpn/client-tcp-1197.ovpn;
-
-# Buat config client UDP 1197
-cd /etc/openvpn
-cat > /etc/openvpn/client-udp-1197.ovpn <<-END
-############## WELCOME TO HideSSH.com ###############
-########## Config Bye HideSSH ###########
-####### DONT FORGET TO SUPPORT US #######
-client
-dev tun
-proto udp
-remote xxxxxxxxx 1197
-##### Modification VPN with BUG and Squid Proxy #####
-#http-proxy-retry
-#http-proxy xxxxxxxxx 3128
-#http-proxy-option CUSTOM-HEADER Host google.com
-##### if used, you can delete the code below ####
-resolv-retry infinite
-route-method exe
-nobind
-persist-key
-persist-tun
-auth-user-pass
-comp-lzo
-verb 3
-client-cert-not-required
-END
-
-sed -i $MYIP2 /etc/openvpn/client-udp-1197.ovpn;
 
 # Buat config client TCP 1194
 cat > /etc/openvpn/client-tcp-1194.ovpn <<-END
@@ -439,22 +324,6 @@ cd
 # pada tulisan xxx ganti dengan alamat ip address VPS anda 
 /etc/init.d/openvpn restart
 
-#1197 TCP
-# masukkan certificatenya ke dalam config client TCP 1197
-echo '<ca>' >> /etc/openvpn/client-tcp-1197.ovpn
-cat /etc/openvpn/ca.crt >> /etc/openvpn/client-tcp-1197.ovpn
-echo '</ca>' >> /etc/openvpn/client-tcp-1197.ovpn
-# Copy config OpenVPN client ke home directory root agar mudah didownload ( TCP 1197 )
-cp /etc/openvpn/client-tcp-1197.ovpn /home/vps/public_html/client-tcp-1197.ovpn
-
-
-#1197 UDP
-# masukkan certificatenya ke dalam config client UDP 1197
-echo '<ca>' >> /etc/openvpn/client-udp-1197.ovpn
-cat /etc/openvpn/ca.crt >> /etc/openvpn/client-udp-1197.ovpn
-echo '</ca>' >> /etc/openvpn/client-udp-1197.ovpn
-# Copy config OpenVPN client ke home directory root agar mudah didownload ( TCP 1197 )
-cp /etc/openvpn/client-udp-1197.ovpn /home/vps/public_html/client-udp-1197.ovpn
 
 #1194 TCP
 # masukkan certificatenya ke dalam config client TCP 1194
@@ -499,8 +368,8 @@ cp /etc/openvpn/client-tcp-ssl.ovpn /home/vps/public_html/client-tcp-ssl.ovpn
 
 iptables -t nat -I POSTROUTING -s 10.6.0.0/24 -o $ANU -j MASQUERADE
 iptables -t nat -I POSTROUTING -s 10.7.0.0/24 -o $ANU -j MASQUERADE
-iptables -t nat -I POSTROUTING -s 10.16.0.0/24 -o $ANU -j MASQUERADE
-iptables -t nat -I POSTROUTING -s 10.17.0.0/24 -o $ANU -j MASQUERADE
+iptables -t nat -I POSTROUTING -s 10.8.0.0/24 -o $ANU -j MASQUERADE
+iptables -t nat -I POSTROUTING -s 10.9.0.0/24 -o $ANU -j MASQUERADE
 iptables-save > /etc/iptables.up.rules
 chmod +x /etc/iptables.up.rules
 
@@ -518,22 +387,17 @@ cat > /etc/network/if-up.d/iptables <<-END
 iptables-restore < /etc/iptables.up.rules
 iptables -t nat -A POSTROUTING -s 10.6.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
-iptables -t nat -A POSTROUTING -s 10.15.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
-iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
+iptables -t nat -A POSTROUTING -s 10.9.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx
 END
 sed -i $MYIP2 /etc/network/if-up.d/iptables
 chmod +x /etc/network/if-up.d/iptables
-netfilter-persistent save
-netfilter-persistent reload
 
 #permision
 #sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.6.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
 #sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
 #sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.15.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
 #sed -i '$ i\iptables -t nat -A POSTROUTING -s 10.17.0.0/24 -o $ANU -j SNAT --to xxxxxxxxx' /etc/rc.local
-
-
-
 
 # restart opevpn
 /etc/init.d/openvpn restart
