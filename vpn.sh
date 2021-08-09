@@ -165,4 +165,5 @@ systemctl start openvpn
 # Delete script
 history -c
 rm -f /root/vpn.sh
-zip config.zip client-tcp-2200.ovpn client-udp-2200.ovpn client-tcp-1194.ovpn client-udp-1194.ovpn client-tcp-ssl.ovpn
+cd /home/vps/public_html
+zip config.zip client-udp-2200.ovpn client-tcp-1194.ovpn client-tcp-ssl.ovpn
