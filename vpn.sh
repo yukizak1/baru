@@ -39,10 +39,18 @@ sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 
 # Buat config client TCP 1194
 cat > /etc/openvpn/client-tcp-1194.ovpn <<-END
+############## WELCOME TO HideSSH.com ###############
+########## Config Bye HideSSH ###########
+####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto tcp
 remote xxxxxxxxx 1194
+##### Modification VPN with BUG and Squid Proxy #####
+#http-proxy-retry
+#http-proxy xxxxxxxxx 3128
+#http-proxy-option CUSTOM-HEADER Host google.com
+##### if used, you can delete the code below ###
 resolv-retry infinite
 route-method exe
 nobind
@@ -51,16 +59,25 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-1194.ovpn;
 
 # Buat config client UDP 2200
 cat > /etc/openvpn/client-udp-2200.ovpn <<-END
+############## WELCOME TO HideSSH.com ###############
+########## Config Bye HideSSH ###########
+####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto udp
 remote xxxxxxxxx 2200
+##### Modification VPN with BUG and Squid Proxy #####
+#http-proxy-retry
+#http-proxy xxxxxxxxx 3128
+#http-proxy-option CUSTOM-HEADER Host google.com
+##### if used, you can delete the code below ###
 resolv-retry infinite
 route-method exe
 nobind
@@ -69,16 +86,25 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-udp-2200.ovpn;
 
 # Buat config client SSL
 cat > /etc/openvpn/client-tcp-ssl.ovpn <<-END
+############## WELCOME TO HideSSH.com ###############
+########## Config Bye HideSSH ###########
+####### DONT FORGET TO SUPPORT US #######
 client
 dev tun
 proto tcp
 remote xxxxxxxxx 442
+##### Modification VPN with BUG and Squid Proxy #####
+#http-proxy-retry
+#http-proxy xxxxxxxxx 3128
+#http-proxy-option CUSTOM-HEADER Host google.com
+##### if used, you can delete the code below ###
 resolv-retry infinite
 route-method exe
 nobind
@@ -87,6 +113,7 @@ persist-tun
 auth-user-pass
 comp-lzo
 verb 3
+client-cert-not-required
 END
 
 sed -i $MYIP2 /etc/openvpn/client-tcp-ssl.ovpn;
@@ -138,3 +165,4 @@ systemctl start openvpn
 # Delete script
 history -c
 rm -f /root/vpn.sh
+zip config.zip client-tcp-2200.ovpn client-udp-2200.ovpn client-tcp-1194.ovpn client-udp-1194.ovpn client-tcp-ssl.ovpn
