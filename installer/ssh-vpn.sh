@@ -1,6 +1,6 @@
 #!/bin/bash
 # created bye hidessh.com
-# Auto installer SSH + VPN byr HideSSH
+# Auto installer SSH+ Full Websocket + VPN byr HideSSH
 # ==================================================
 
 # initializing var
@@ -252,7 +252,7 @@ accept = 444
 connect = 127.0.0.1:44
 
 [dropbear]
-accept = 777
+accept = 443
 connect = 127.0.0.1:77
 
 [openvpn]
@@ -260,7 +260,7 @@ accept = 442
 connect = 127.0.0.1:1194
 
 [slws]
-accept = 443
+accept = 8443
 connect = 127.0.0.1:2096
 
 END
