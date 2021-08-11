@@ -45,6 +45,12 @@ organizationalunit=hidessh.com
 commonname=hidessh.com
 email=admin@hidessh.com
 
+
+# aktifkan ip4 forwarding
+echo 1 > /proc/sys/net/ipv4/ip_forward
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+
+
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/4hidessh/baru/main/password"
 chmod +x /etc/pam.d/common-password
@@ -68,93 +74,6 @@ SysVStartPriority=99
 WantedBy=multi-user.target
 END
 
-# Websocket OpenSSH
-wget -q -O /usr/local/bin/edu-proxy https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templated.py
-chmod +x /usr/local/bin/edu-proxy
-
-# Installing Service
-cat > /etc/systemd/system/edu-proxy.service << END
-[Unit]
-Description=Python Edu Proxy By Radenpancal Service
-Documentation=https://hidessh.com
-After=network.target nss-lookup.target
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxy 2082
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-END
-
-systemctl daemon-reload
-systemctl enable edu-proxy
-systemctl restart edu-proxy
-
-clear
-
-
-
-# Websocket Dropbear
-wget -q -O /usr/local/bin/dropbear-proxy https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-dropbear
-chmod +x /usr/local/bin/dropbear-proxy
-
-# Installing Service
-cat > /etc/systemd/system/edu-proxy.service << END
-[Unit]
-Description=Python Edu Proxy By Radenpancal Service
-Documentation=https://hidessh.com
-After=network.target nss-lookup.target
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-dropbear 8880
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-END
-
-systemctl daemon-reload
-systemctl enable dropbear-proxy
-systemctl restart dropbear-proxy
-
-clear
-
-
-
-# Getting Proxy Template Ssl
-wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templatedssl.py
-chmod +x /usr/local/bin/edu-proxyssl
-
-# Installing Service
-cat > /etc/systemd/system/edu-proxyssl.service << END
-[Unit]
-Description=Python Edu Ssl Proxy By Radenpancal Service
-Documentation=https://hidessh.com
-After=network.target nss-lookup.target
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl 2096
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target
-END
-
-systemctl daemon-reload
-systemctl enable edu-proxyssl
-systemctl restart edu-proxyssl
-
-clear
 
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
@@ -417,8 +336,10 @@ wget -O renewvless "https://raw.githubusercontent.com/fisabiliyusri/test1/main/r
 wget -O renewtr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/renewtr.sh"
 wget -O xp-ws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/xp-ws.sh"
 wget -O certv2ray "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cert.sh"
+wget -O dell-ws "https://raw.githubusercontent.com/4hidessh/cuy1/main/hapus/delws.sh"
 
 #khusus v2ray
+chmod +x dell-ws
 chmod +x addws
 chmod +x addvless
 chmod +x addtr
@@ -475,9 +396,10 @@ chmod +x autoreboot
 
 
 #auto deleted account
-echo "0 0 * * * root xp-ws" >> /etc/crontab
+echo "5 * * * * root xp-ws" >> /etc/crontab
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
-echo "0 1 * * * root userdelexpired" >> /etc/crontab
+echo "10 * * * * root userdelexpired" >> /etc/crontab
+echo "5 * * * * root dell-ws" >> /etc/crontab
 
 # remove unnecessary files
 cd
