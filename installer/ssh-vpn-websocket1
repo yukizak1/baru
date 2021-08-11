@@ -108,7 +108,6 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 800
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 800
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 800
 
-
 # setting port ssh
 sed -i '/Port 22/a Port 88' /etc/ssh/sshd_config
 sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
@@ -165,8 +164,8 @@ cd
 apt-get install sslh -y
 
 #konfigurasi
-#port 333 to 44 and 777
-wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/baru/main/sslh-conf"
+#port 333 to 77 and 777
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/baru/main/sslh1"
 service sslh restart
 
 
