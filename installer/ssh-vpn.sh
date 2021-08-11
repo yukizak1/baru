@@ -450,7 +450,7 @@ chmod +x autoreboot
 
 
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
-echo "0 4 * * * root userdelexpired" >> /etc/crontab
+echo "30 * * * * root userdelexpired" >> /etc/crontab
 
 
 # remove unnecessary files
