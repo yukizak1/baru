@@ -96,6 +96,38 @@ systemctl restart edu-proxy
 
 clear
 
+
+
+# Websocket Dropbear
+wget -q -O /usr/local/bin/dropbear-proxy https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-dropbear
+chmod +x /usr/local/bin/dropbear-proxy
+
+# Installing Service
+cat > /etc/systemd/system/edu-proxy.service << END
+[Unit]
+Description=Python Edu Proxy By Radenpancal Service
+Documentation=https://hidessh.com
+After=network.target nss-lookup.target
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/edu-dropbear 8880
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target
+END
+
+systemctl daemon-reload
+systemctl enable dropbear-proxy
+systemctl restart dropbear-proxy
+
+clear
+
+
+
 # Getting Proxy Template Ssl
 wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/proxy-templatedssl.py
 chmod +x /usr/local/bin/edu-proxyssl
@@ -112,7 +144,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl 700
+ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl 2096
 Restart=on-failure
 [Install]
 WantedBy=multi-user.target
@@ -193,7 +225,7 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 
 # setting port ssh
 
-sed -i '/Port 22/a Port 143' /etc/ssh/sshd_config
+sed -i '/Port 22/a Port 88' /etc/ssh/sshd_config
 sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
 
 
@@ -201,7 +233,7 @@ sed -i 's/#Port 22/Port 22/g' /etc/ssh/sshd_config
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=44/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 69"/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 69" -p 300/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
@@ -227,15 +259,11 @@ connect = 127.0.0.1:22
 
 [dropbear]
 accept = 444
-connect = 127.0.0.1:44
+connect = 127.0.0.1:300
 
-[openvpn]
-accept = 442
-connect = 127.0.0.1:1194
-
-[wsssl]
+[slws]
 accept = 2083
-connect = 700
+connect = 127.0.0.1:2096
 
 END
 
@@ -324,7 +352,7 @@ apt-get install sslh -y
 
 #konfigurasi
 #port 333
-wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/hidessh/main/sslh/sslh1"
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/baru/main/sslh-conf"
 service sslh restart
 
 cd
