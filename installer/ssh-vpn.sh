@@ -62,7 +62,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxy 2082
+ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxy
 Restart=on-failure
 
 [Install]
@@ -104,7 +104,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl 2096
+ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyssl
 Restart=on-failure
 
 [Install]
@@ -134,7 +134,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyovpn 2086
+ExecStart=/usr/bin/python -O /usr/local/bin/edu-proxyovpn
 Restart=on-failure
 
 [Install]
