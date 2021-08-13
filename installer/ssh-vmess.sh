@@ -337,7 +337,7 @@ wget -O renewtr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/rene
 wget -O xp-ws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/xp-ws.sh"
 wget -O certv2ray "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cert.sh"
 wget -O dell-ws "https://raw.githubusercontent.com/4hidessh/cuy1/main/hapus/delws.sh"
-wget -O kekey1 "https://raw.githubusercontent.com/4hidessh/cuy1/main/hapus/delws.sh"
+wget -O kekey1 "https://raw.githubusercontent.com/4hidessh/baru/main/deleted/v2ray"
 
 
 
