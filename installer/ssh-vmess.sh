@@ -337,8 +337,13 @@ wget -O renewtr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/rene
 wget -O xp-ws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/xp-ws.sh"
 wget -O certv2ray "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cert.sh"
 wget -O dell-ws "https://raw.githubusercontent.com/4hidessh/cuy1/main/hapus/delws.sh"
+wget -O kekey1 "https://raw.githubusercontent.com/4hidessh/cuy1/main/hapus/delws.sh"
+
+
+
 
 #khusus v2ray
+chmod +x kekey1
 chmod +x dell-ws
 chmod +x addws
 chmod +x addvless
@@ -396,10 +401,8 @@ chmod +x autoreboot
 
 
 #auto deleted account
-echo "5 * * * * root xp-ws" >> /etc/crontab
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
-echo "10 * * * * root userdelexpired" >> /etc/crontab
-echo "5 * * * * root dell-ws" >> /etc/crontab
+echo "30 * * * * root userdelexpired" >> /etc/crontab
 
 # remove unnecessary files
 cd
