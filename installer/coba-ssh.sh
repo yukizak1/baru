@@ -77,7 +77,7 @@ clear
 
 # Dropbear WebSocket
 cd
-wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-dropbear && chmod +x /usr/local/bin/ws-dropbear
+wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/cobaan-ssl && chmod +x /usr/local/bin/ws-dropbear
 wget -O /etc/systemd/system/ws-dropbear.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-dropbear.service && chmod +x /etc/systemd/system/ws-dropbear.service
 #reboot service
 systemctl daemon-reload
@@ -88,7 +88,7 @@ systemctl restart ws-dropbear.service
 clear
 
 # Getting Proxy Template Ssl
-wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-stunnel
+wget -q -O /usr/local/bin/edu-proxyssl https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/cobaan-dropbear
 chmod +x /usr/local/bin/edu-proxyssl
 
 # Installing Service
@@ -149,8 +149,8 @@ clear
 
 #keterangan_WebSocket  
 #OpenSSH Websocket 88 to 2082 HTTP
-#Dropbear Websocket 69 to 8880 HTTP
-#SSL/TLS Websocket 333 to 2096 HTTPS
+#SSL/TLS Websocket 69 to 2096 HTTP
+#Dropber Websocket 333 to 8880 HTTPS
 #OpenVPN Websocket 1194 to 2086 HTTP
 
 #Selesai instalasi Websocket
@@ -248,7 +248,7 @@ accept = 222
 connect = 127.0.0.1:22
 
 [dropbear]
-accept = 443
+accept = 444
 connect = 127.0.0.1:300
 
 [dropbear]
@@ -260,7 +260,7 @@ accept = 442
 connect = 127.0.0.1:1194
 
 [slws]
-accept = 8443
+accept = 443
 connect = 127.0.0.1:2096
 
 END
