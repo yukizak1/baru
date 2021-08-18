@@ -1,5 +1,5 @@
 [Unit]
-Description=SSH Over Websocket Python YNTKTS
+Description=HTTPS SSH Over Websocket Python HideSSH.com
 Documentation=https://hidessh.com
 After=network.target nss-lookup.target
 
