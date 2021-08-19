@@ -69,7 +69,16 @@ systemctl start ws-dropbear.service
 systemctl restart ws-dropbear.service
 clear
 
-
+# Dropbear WebSocket
+#port 1194 ( Dropbear) to 2086 (HTTP Websocket)
+wget -O /usr/local/bin/edu-proxyovpn https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/ovpn.py && chmod +x /usr/local/bin/edu-proxyovpn
+wget -O /etc/systemd/system/edu-proxyovpn.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/ovpn.service && chmod +x /etc/systemd/system/edu-proxyovpn.service
+#reboot service
+systemctl daemon-reload
+systemctl enable edu-proxyovpn.service
+systemctl start edu-proxyovpn.service
+systemctl restart edu-proxyovpn.service
+clear
 
 # nano /etc/rc.local
 cat > /etc/rc.local <<-END
@@ -366,7 +375,7 @@ chmod +x autoreboot
 
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
 echo "0 17 * * * root clear-log && reboot" >> /etc/crontab
-echo "30 * * * * root userdelexpired" >> /etc/crontab
+echo "50 * * * * root userdelexpired" >> /etc/crontab
 
 
 # remove unnecessary files
