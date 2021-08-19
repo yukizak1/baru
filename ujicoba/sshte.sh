@@ -1,12 +1,7 @@
 #!/bin/bash
 # created bye hidessh.com
-# Auto installer SSH+ Full Websocket + VPN by3 HideSSH
+# Auto installer SSH+ Full Websocket + VPN bye HideSSH
 # port Stunnel and Websocket 443
-#keterangan_WebSocket  
-#OpenSSH Websocket 88 to 2082 HTTP
-#SSL/TLS Websocket 69 to 2096 HTTP
-#SSLH : 443 : 2082 and 444
-#OpenVPN Websocket 1194 to 2086 HTTP
 #Selesai instalasi Websocket
 # ==================================================
 
@@ -53,15 +48,17 @@ END
 #instalasi Websocket
 
 # Websocket OpenSSH
+#port 88 (OpenSSH) to 2082 (HTTP Websocket)
 cd
 wget -O /usr/local/bin/edu-proxy https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/http.py && chmod +x /usr/local/bin/edu-proxy
-wget -O /etc/systemd/system/edu-proxy.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/ws-dropbear.service && chmod +x /etc/systemd/system/edu-proxy.service
+wget -O /etc/systemd/system/edu-proxy.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/http.service && chmod +x /etc/systemd/system/edu-proxy.service
 systemctl daemon-reload
 systemctl enable edu-proxy
 systemctl restart edu-proxy
 clear
 
 # Dropbear WebSocket
+#port 69 ( Dropbear) to 8880 (HTTPS Websocket)
 cd
 wget -O /usr/local/bin/ws-dropbear https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/https.py && chmod +x /usr/local/bin/ws-dropbear
 wget -O /etc/systemd/system/ws-dropbear.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/https.service && chmod +x /etc/systemd/system/ws-dropbear.service
@@ -178,8 +175,8 @@ accept = 442
 connect = 127.0.0.1:1194
 
 [slws]
-accept = 8443
-connect = 127.0.0.1:2096
+accept = 3126
+connect = 127.0.0.1:443
 
 END
 
