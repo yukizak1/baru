@@ -160,8 +160,14 @@ echo "/usr/sbin/nologin" >> /etc/shells
 
 # install stunnel
 apt install stunnel4 -y
+
+#certi stunnel
+wget -O /etc/stunnel/hidessh.pem https://raw.githubusercontent.com/4hidessh/baru/main/certi/stunel && chmod +x /etc/stunnel/hidessh.pem
+
+
+#konfigurasi stunnel4
 cat > /etc/stunnel/stunnel.conf <<-END
-cert = /etc/stunnel/stunnel.pem
+cert = /etc/stunnel/hidessh.pem
 client = no
 socket = a:SO_REUSEADDR=1
 socket = l:TCP_NODELAY=1
