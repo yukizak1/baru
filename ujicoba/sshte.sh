@@ -190,7 +190,7 @@ accept = 442
 connect = 127.0.0.1:1194
 
 [slws]
-accept = 3126
+accept = 8443
 connect = 127.0.0.1:443
 
 END
