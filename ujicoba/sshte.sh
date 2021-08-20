@@ -69,7 +69,7 @@ systemctl start ws-dropbear.service
 systemctl restart ws-dropbear.service
 clear
 
-# Dropbear WebSocket
+# OpenVPN WebSocket
 #port 1194 ( Dropbear) to 2086 (HTTP Websocket)
 wget -O /usr/local/bin/edu-proxyovpn https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/ovpn.py && chmod +x /usr/local/bin/edu-proxyovpn
 wget -O /etc/systemd/system/edu-proxyovpn.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/ovpn.service && chmod +x /etc/systemd/system/edu-proxyovpn.service
