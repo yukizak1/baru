@@ -52,9 +52,9 @@ END
 cd
 wget -O /usr/local/bin/edu-proxy https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/http.py && chmod +x /usr/local/bin/edu-proxy
 wget -O /etc/systemd/system/edu-proxy.service https://raw.githubusercontent.com/4hidessh/baru/main/websocket-python/baru/http.service && chmod +x /etc/systemd/system/edu-proxy.service
-systemctl daemon-reload
-systemctl enable edu-proxy
-systemctl restart edu-proxy
+systemctl daemon-reload.service
+systemctl enable edu-proxy.service
+systemctl restart edu-proxy.service
 clear
 
 # Dropbear WebSocket
