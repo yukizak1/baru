@@ -1,10 +1,12 @@
-#!/usr/bin/python
 import socket, threading, thread, select, signal, sys, time, getopt
 
 # Listen
 LISTENING_ADDR = '0.0.0.0'
-LISTENING_PORT = sys.argv[1]
-# Pass
+if sys.argv[1:]:
+  LISTENING_PORT = sys.argv[1]
+else:
+  LISTENING_PORT = 2086  
+#Pass
 PASS = ''
 
 # CONST
