@@ -271,7 +271,7 @@ apt-get install sslh -y
 
 #konfigurasi
 #port 333
-wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/baru/main/sslh-conf"
+wget -O /etc/default/sslh "https://raw.githubusercontent.com/4hidessh/baru/main/SSLH/v2ray-ssl"
 service sslh restart
 
 cd
