@@ -314,7 +314,6 @@ wget -O port-ws "https://raw.githubusercontent.com/4hidessh/baru/main/port-ws.sh
 wget -O port-vless "https://raw.githubusercontent.com/4hidessh/baru/main/port-vless.sh"
 wget -O wbmn "https://raw.githubusercontent.com/4hidessh/baru/main/webmin.sh"
 wget -O xp "https://raw.githubusercontent.com/4hidessh/baru/main/xp.sh"
-wget -O update "https://raw.githubusercontent.com/4hidessh/baru/main/update.sh"
 wget -O /usr/bin/user-limit https://raw.githubusercontent.com/4hidessh/baru/main/user-limit.sh && chmod +x /usr/bin/user-limit
 wget -O cfd "https://raw.githubusercontent.com/4hidessh/baru/main/cfd.sh"
 wget -O cff "https://raw.githubusercontent.com/4hidessh/baru/main/cff.sh"
@@ -337,13 +336,8 @@ wget -O renewtr "https://raw.githubusercontent.com/fisabiliyusri/test1/main/rene
 wget -O xp-ws "https://raw.githubusercontent.com/fisabiliyusri/test1/main/xp-ws.sh"
 wget -O certv2ray "https://raw.githubusercontent.com/fisabiliyusri/test1/main/cert.sh"
 wget -O dell-ws "https://raw.githubusercontent.com/4hidessh/cuy1/main/hapus/delws.sh"
-wget -O kekey1 "https://raw.githubusercontent.com/4hidessh/baru/main/deleted/v2ray"
-
-
-
 
 #khusus v2ray
-chmod +x kekey1
 chmod +x dell-ws
 chmod +x addws
 chmod +x addvless
