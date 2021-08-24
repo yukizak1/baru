@@ -288,11 +288,11 @@ cd
 # iptables-persistent
 echo "================  Firewall ======================"
 apt install iptables-persistent -y
-wget https://raw.githubusercontent.com/4hidessh/hidessh/main/security/torrent
-chmod +x torrent
-bash torrent
-netfilter-persistent save
-netfilter-persistent reload 
+#wget https://raw.githubusercontent.com/4hidessh/hidessh/main/security/torrent
+#chmod +x torrent
+#bash torrent
+#netfilter-persistent save
+#netfilter-persistent reload 
 
 cd
 # Delete Acount SSH Expired
