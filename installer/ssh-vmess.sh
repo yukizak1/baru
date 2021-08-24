@@ -45,12 +45,6 @@ organizationalunit=hidessh.com
 commonname=hidessh.com
 email=admin@hidessh.com
 
-
-# aktifkan ip4 forwarding
-echo 1 > /proc/sys/net/ipv4/ip_forward
-sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-
-
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/4hidessh/baru/main/password"
 chmod +x /etc/pam.d/common-password
