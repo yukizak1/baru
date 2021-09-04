@@ -158,6 +158,8 @@ sed -i $MYIP2 /etc/squid/squid.conf
 #certi stunnel
 wget -O /etc/stunnel/hidessh.pem https://raw.githubusercontent.com/4hidessh/baru/main/certi/stunel && chmod +x /etc/stunnel/hidessh.pem
 
+apt install stunnel4 -y
+
 #konfigurasi stunnel4
 cat > /etc/stunnel/stunnel.conf <<-END
 cert = /etc/stunnel/hidessh.pem
