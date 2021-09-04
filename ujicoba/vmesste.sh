@@ -298,9 +298,6 @@ echo "================  Auto deleted Account Expired ======================"
 wget -O /usr/local/bin/userdelexpired "https://raw.githubusercontent.com/4hidessh/sshtunnel/master/userdelexpired" && chmod +x /usr/local/bin/userdelexpired
 
 
-#auto reboot server
-echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
-echo "0 0 * * * root xp" >> /etc/crontab
 
 # remove unnecessary files
 cd
