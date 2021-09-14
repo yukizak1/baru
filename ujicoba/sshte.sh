@@ -265,11 +265,11 @@ echo 'Please send in your comments and/or suggestions to zaf@vsnl.com'
 
 # blockir torrent
 apt install iptables-persistent -y
-wget https://raw.githubusercontent.com/4hidessh/hidessh/main/security/torrent && chmod +x torrent && ./torrent
-iptables-save > /etc/iptables.up.rules
-iptables-restore -t < /etc/iptables.up.rules
-netfilter-persistent save
-netfilter-persistent reload
+#wget https://raw.githubusercontent.com/4hidessh/hidessh/main/security/torrent && chmod +x torrent && ./torrent
+#iptables-save > /etc/iptables.up.rules
+#iptables-restore -t < /etc/iptables.up.rules
+#netfilter-persistent save
+#netfilter-persistent reload
 
 
 cd
