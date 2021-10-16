@@ -328,12 +328,13 @@ wget -O port-vless "https://raw.githubusercontent.com/4hidessh/baru/main/port-vl
 wget -O wbmn "https://raw.githubusercontent.com/4hidessh/baru/main/webmin.sh"
 wget -O xp "https://raw.githubusercontent.com/4hidessh/baru/main/xp.sh"
 wget -O update "https://raw.githubusercontent.com/4hidessh/baru/main/update.sh"
-wget -O /usr/bin/user-limit https://raw.githubusercontent.com/4hidessh/baru/main/user-limit.sh && chmod +x /usr/bin/user-limit
+wget -O user-limit "https://raw.githubusercontent.com/4hidessh/baru/main/user-limit.sh"  
 wget -O cfd "https://raw.githubusercontent.com/4hidessh/baru/main/cfd.sh"
 wget -O cff "https://raw.githubusercontent.com/4hidessh/baru/main/cff.sh"
 wget -O cfh "https://raw.githubusercontent.com/4hidessh/baru/main/cfh.sh"
 wget -O autoreboot "https://raw.githubusercontent.com/4hidessh/baru/main/autoreboot.sh"
 chmod +x add-host
+chmod +x user-limit
 chmod +x menu
 chmod +x usernew
 chmod +x trial
