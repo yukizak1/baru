@@ -332,7 +332,7 @@ wget -O user-limit "https://raw.githubusercontent.com/4hidessh/baru/main/user-li
 wget -O cfd "https://raw.githubusercontent.com/4hidessh/baru/main/cfd.sh"
 wget -O cff "https://raw.githubusercontent.com/4hidessh/baru/main/cff.sh"
 wget -O cfh "https://raw.githubusercontent.com/4hidessh/baru/main/cfh.sh"
-wget -O autoreboot "https://raw.githubusercontent.com/4hidessh/baru/main/autoreboot.sh"
+wget -O autoreboot "https://raw.githubusercontent.com/4hidessh/baru/main/allservice.sh"
 chmod +x add-host
 chmod +x user-limit
 chmod +x menu
@@ -369,7 +369,9 @@ chmod +x cff
 chmod +x cfh
 chmod +x autoreboot
 
-
+#cronjob
+echo "0 23 * * * root clear-log && autoreboot" >> /etc/crontab
+echo "0 11 * * * root clear-log && autoreboot" >> /etc/crontab
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
 echo "0 17 * * * root clear-log && reboot" >> /etc/crontab
 echo "50 * * * * root userdelexpired" >> /etc/crontab
