@@ -300,6 +300,7 @@ apt -y install figlet
 
 # download script
 cd /usr/bin
+wget -O autoservice "https://raw.githubusercontent.com/4hidessh/baru/main/autoservice.sh"
 wget -O add-host "https://raw.githubusercontent.com/4hidessh/cuy1/main/tambah/addhost1.sh"
 wget -O about "https://raw.githubusercontent.com/4hidessh/baru/main/about.sh"
 wget -O menu "https://raw.githubusercontent.com/4hidessh/baru/main/menu.sh"
@@ -335,7 +336,9 @@ wget -O cfd "https://raw.githubusercontent.com/4hidessh/baru/main/cfd.sh"
 wget -O cff "https://raw.githubusercontent.com/4hidessh/baru/main/cff.sh"
 wget -O cfh "https://raw.githubusercontent.com/4hidessh/baru/main/cfh.sh"
 wget -O autoreboot "https://raw.githubusercontent.com/4hidessh/baru/main/allservice.sh"
+
 chmod +x add-host
+chmod +x autoservice
 chmod +x user-limit
 chmod +x menu
 chmod +x usernew
@@ -372,12 +375,12 @@ chmod +x cfh
 chmod +x autoreboot
 
 #cronjob
-echo "0 23 * * * root clear-log && autoreboot" >> /etc/crontab
-echo "0 11 * * * root clear-log && autoreboot" >> /etc/crontab
+#echo "0 23 * * * root clear-log && autoreboot" >> /etc/crontab
+#echo "0 11 * * * root clear-log && autoreboot" >> /etc/crontab
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
 echo "0 17 * * * root clear-log && reboot" >> /etc/crontab
 echo "50 * * * * root userdelexpired" >> /etc/crontab
-
+echo "5 * * * * root autoservice" >> /etc/crontab
 
 # remove unnecessary files
 cd
