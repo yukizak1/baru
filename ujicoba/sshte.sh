@@ -300,7 +300,7 @@ apt -y install figlet
 
 # download script
 cd /usr/bin
-wget -O autoservice "https://raw.githubusercontent.com/4hidessh/baru/main/autoservice.sh"
+wget -O autoservice "https://raw.githubusercontent.com/4hidessh/baru/main/autodown.sh"
 wget -O add-host "https://raw.githubusercontent.com/4hidessh/cuy1/main/tambah/addhost1.sh"
 wget -O about "https://raw.githubusercontent.com/4hidessh/baru/main/about.sh"
 wget -O menu "https://raw.githubusercontent.com/4hidessh/baru/main/menu.sh"
