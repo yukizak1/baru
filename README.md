@@ -16,4 +16,9 @@ wget https://raw.githubusercontent.com/idtunnel/sshtunnel/master/centos/centos6-
 --------
 ```
 wget https://raw.githubusercontent.com/idtunnel/sshtunnel/master/centos/openvpn/centos.sh && chmod +x centos.sh && ./centos.sh
+
 ```
+
+
+
+sumber https://hidessh.com/blog/install-ssh-dan-vpn-di-vps/
