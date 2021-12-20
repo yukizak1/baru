@@ -228,6 +228,7 @@ wget -O speedtest "https://raw.githubusercontent.com/idtunnel/sshtunnel/master/d
 wget -O info "https://raw.githubusercontent.com/idtunnel/sshtunnel/master/debian9/info.sh"
 wget -O about "https://raw.githubusercontent.com/idtunnel/sshtunnel/master/debian9/about.sh"
 wget -O delete "https://raw.githubusercontent.com/idtunnel/sshtunnel/master/debian9/delete.sh"
+wget -O autoservice "https://raw.githubusercontent.com/4hidessh/baru/main/autodown.sh"
 
 #permisiion
 chmod +x menu
@@ -241,13 +242,16 @@ chmod +x speedtest
 chmod +x info
 chmod +x about
 chmod +x delete
+chmod +x autoservice
 
 
 # autoreboot 12 jam
 
 echo "================  Auto Reboot ======================"
-echo "0 0 * * * root /sbin/reboot" > /etc/cron.d/reboot
-
+echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
+echo "0 17 * * * root clear-log && reboot" >> /etc/crontab
+echo "50 * * * * root userdelexpired" >> /etc/crontab
+echo "5 * * * * root autoservice" >> /etc/crontab
 
 #auto Reboot Service Setelah Selesai
 cd
