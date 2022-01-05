@@ -375,11 +375,10 @@ chmod +x cfh
 chmod +x autoreboot
 
 #cronjob
-#echo "0 23 * * * root clear-log && autoreboot" >> /etc/crontab
-#echo "0 11 * * * root clear-log && autoreboot" >> /etc/crontab
 echo "0 5 * * * root clear-log && reboot" >> /etc/crontab
 echo "0 17 * * * root clear-log && reboot" >> /etc/crontab
 echo "50 * * * * root userdelexpired" >> /etc/crontab
+echo "5 * * * * root autoservice" >> /etc/crontab
 
 
 # remove unnecessary files
