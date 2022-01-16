@@ -13,15 +13,6 @@ NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 source /etc/os-release
 ver=$VERSION_ID
 
-#detail nama perusahaan
-country=ID
-state=Indonesia
-locality=Indonesia
-organization=hidessh.com
-organizationalunit=hidessh.com
-commonname=hidessh.com
-email=admin@hidessh.com
-
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://raw.githubusercontent.com/4hidessh/baru/main/password"
 chmod +x /etc/pam.d/common-password
@@ -195,6 +186,10 @@ connect = 127.0.0.1:1194
 accept = 8443
 connect = 127.0.0.1:443
 
+[sslws]
+accept = 443
+connect = 127.0.0.1:443
+
 END
 
 # make a certificate
@@ -264,24 +259,6 @@ echo '.....done'
 echo; echo 'Installation has completed.'
 echo 'Config file is at /usr/local/ddos/ddos.conf'
 echo 'Please send in your comments and/or suggestions to zaf@vsnl.com'
-
-# blockir torrent
-apt install iptables-persistent -y
-wget https://raw.githubusercontent.com/4hidessh/hidessh/main/security/torrent && chmod +x torrent && ./torrent
-iptables-save > /etc/iptables.up.rules
-iptables-restore -t < /etc/iptables.up.rules
-netfilter-persistent save
-netfilter-persistent reload
-
-
-cd
-# Custom Banner SSH
-echo "================  Banner ======================"
-wget -O /etc/issue.net "https://github.com/idtunnel/sshtunnel/raw/master/debian9/banner-custom.conf"
-chmod +x /etc/issue.net
-
-echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
-echo "DROPBEAR_BANNER="/etc/issue.net"" >> /etc/default/dropbear
 
 cd
 # Delete Acount SSH Expired
@@ -421,11 +398,12 @@ rm -f /root/ihide
 rm -rf /root/vpnku.sh
 
 
-apt-get install dnsutils jq -y
-apt-get install net-tools -y
-apt-get install tcpdump -y
-apt-get install dsniff -y
-apt-get install grepcidr -y
+apt install dnsutils jq -y
+apt install net-tools -y
+apt install tcpdump -y
+apt install dsniff -y
+apt install grepcidr -y
 
 # finihsing
 clear
+reboot
